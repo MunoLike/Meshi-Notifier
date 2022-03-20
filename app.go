@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
@@ -14,7 +15,24 @@ import (
 var DiscordSession *discordgo.Session
 
 func notifyMeshi(c echo.Context) error {
-	DiscordSession.ChannelMessageSend(os.Getenv("CHANNEL_ID"), "飯だが")
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+	now := time.Now().In(jst)
+
+	hour := now.Hour()
+	if 3 <= hour && hour <= 10 {
+		// 朝
+		DiscordSession.ChannelMessageSend(os.Getenv("CHANNEL_ID"), "朝飯の時間よ～～🍚")
+	} else if 11 <= hour && hour <= 15 {
+		// 昼
+		DiscordSession.ChannelMessageSend(os.Getenv("CHANNEL_ID"), "昼飯～～\u2600")
+	} else {
+		// 夜
+		DiscordSession.ChannelMessageSend(os.Getenv("CHANNEL_ID"), "晩飯だからすぐに来い😁")
+	}
+
 	return c.String(http.StatusOK, "Hello, World")
 }
 
