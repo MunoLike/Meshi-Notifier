@@ -8,4 +8,4 @@ FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
 # [Optional] Uncomment the next lines to use go get to install anything else you need
 # USER vscode
-# RUN go get github.com/bwmarrin/discordgo
+#RUN go mod download

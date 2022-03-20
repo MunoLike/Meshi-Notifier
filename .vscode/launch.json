@@ -6,7 +6,10 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/test-project/hello.go"
+            "program": "${workspaceFolder}/app.go",
+            "env": {
+                "ISDBG": "True"
+            }
         }
     ]
 }

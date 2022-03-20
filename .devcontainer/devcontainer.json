@@ -11,7 +11,9 @@
 	"settings": {
 		"go.toolsManagement.checkForUpdates": "local",
 		"go.useLanguageServer": true,
-		"go.gopath": "/go"
+		"go.gopath": "/go",
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "golang.go"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
