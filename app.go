@@ -15,6 +15,10 @@ import (
 var DiscordSession *discordgo.Session
 
 func notifyMeshi(c echo.Context) error {
+	if c.Request().Header.Get("id") != os.Getenv("id") {
+		return c.String(http.StatusUnauthorized, "NG")
+	}
+
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
 		log.Fatalf("%v", err)
@@ -70,7 +74,7 @@ func main() {
 	// Start REST API
 	e := echo.New()
 
-	e.GET("/call", notifyMeshi)
+	e.POST("/call", notifyMeshi)
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv(("PORT"))))
 }
